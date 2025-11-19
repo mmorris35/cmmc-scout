@@ -15,6 +15,14 @@ app = FastAPI(
     version="0.1.0",
 )
 
+# Import and include routers
+try:
+    from src.auth.routes import router as auth_router
+    app.include_router(auth_router)
+except Exception as e:
+    # Auth0 not configured - continue without auth routes
+    print(f"Warning: Auth routes not loaded ({e})")
+
 # CORS configuration
 app.add_middleware(
     CORSMiddleware,
@@ -58,8 +66,14 @@ async def root():
     """
     return {
         "message": "CMMC Scout API",
+        "version": "0.1.0",
         "docs": "/docs",
         "health": "/health",
+        "auth": {
+            "login": "/auth/login",
+            "user": "/auth/user",
+            "verify": "/auth/verify",
+        },
     }
 
 
