@@ -173,6 +173,57 @@ open http://localhost:8000/docs
 
 ---
 
+## Demo
+
+### Quick Demo (3 minutes)
+
+For hackathon judges and stakeholders, we've prepared a **comprehensive 3-minute demo** showcasing all features and vendor integrations.
+
+**📺 Watch the Demo Video:** [YouTube Link - Coming Soon]
+
+**🎬 Run the Interactive Demo:**
+
+```bash
+# Activate virtual environment
+source venv/bin/activate
+
+# Run the demo CLI
+python scripts/demo_cli.py
+```
+
+The demo script will:
+1. Create a sample assessment for the Access Control domain
+2. Show AI-powered question generation for 4 controls
+3. Demonstrate real-time classification (✓ Compliant / ⚠ Partial / ✗ Non-compliant)
+4. Generate a comprehensive gap report with:
+   - Overall compliance score and traffic light status
+   - Identified gaps with priority levels
+   - Cost and timeline estimates
+   - Remediation recommendations
+
+**📖 Full Demo Script:** See [DEMO.md](DEMO.md) for the complete presentation script with timing, vendor integration highlights, and business value proposition.
+
+### Sample Report
+
+To see what a complete gap report looks like:
+
+```bash
+# Generate sample report with realistic data
+python scripts/generate_sample_report.py
+
+# This creates:
+# - sample_report.md (Markdown format)
+# - sample_report.json (JSON format)
+```
+
+**Sample Output:**
+- **Compliance Score:** 62.5% (YELLOW)
+- **Controls Assessed:** 9 (3 compliant, 3 partial, 2 non-compliant)
+- **High Priority Gaps:** 2 controls requiring immediate attention
+- **Medium Priority Gaps:** 3 controls needing enhancement
+
+---
+
 ## Usage
 
 ### Starting an Assessment
