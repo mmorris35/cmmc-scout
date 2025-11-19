@@ -13,7 +13,8 @@ alembic==1.13.0
 pykka==4.0.1
 
 # Event Streaming (Redpanda/Kafka)
-kafka-python==2.0.2
+# Using kafka-python-ng (maintained fork for Python 3.12+)
+kafka-python-ng==2.2.2
 
 # Authentication (Auth0)
 authlib==1.3.0
