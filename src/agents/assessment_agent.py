@@ -354,6 +354,7 @@ def create_assessment_agent(
                 comet_experiment = Experiment(
                     api_key=api_key,
                     project_name=project_name,
+                    display_summary_level=0,  # Disable verbose console output
                 )
                 comet_experiment.set_name(f"assessment_{control_data.get('control_id')}")
                 comet_experiment.add_tag("assessment")
