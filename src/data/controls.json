@@ -1,0 +1,137 @@
+[
+  {
+    "control_id": "AC.L2-3.1.1",
+    "domain": "Access Control",
+    "title": "Authorized Access Enforcement",
+    "requirement": "Limit system access to authorized users, processes acting on behalf of authorized users, and devices (including other systems).",
+    "assessment_objective": "Determine if the organization has documented policies and procedures for limiting system access to authorized users, processes acting on behalf of authorized users, and devices.",
+    "discussion": "Access control policies (e.g., identity or role-based policies, control matrices, and cryptography) and access enforcement mechanisms (e.g., access control lists, access control matrices, and cryptography) are employed by organizations to control access between users or processes acting on behalf of users and objects in a system.",
+    "nist_reference": "NIST SP 800-171 Rev 2 3.1.1"
+  },
+  {
+    "control_id": "AC.L2-3.1.2",
+    "domain": "Access Control",
+    "title": "Transaction and Function Control",
+    "requirement": "Limit system access to the types of transactions and functions that authorized users are permitted to execute.",
+    "assessment_objective": "Determine if the organization limits system access to the types of transactions and functions that authorized users are permitted to execute.",
+    "discussion": "Organizations may choose to define access privileges or other attributes by account, by type of account, or a combination of both. System account types include individual, shared, group, system, anonymous, guest, emergency, developer, manufacturer, vendor, and temporary.",
+    "nist_reference": "NIST SP 800-171 Rev 2 3.1.2"
+  },
+  {
+    "control_id": "AC.L2-3.1.3",
+    "domain": "Access Control",
+    "title": "External Connections",
+    "requirement": "Control the flow of CUI in accordance with approved authorizations.",
+    "assessment_objective": "Determine if the organization controls the flow of CUI in accordance with approved authorizations.",
+    "discussion": "Information flow control regulates where information can travel within a system and between systems (versus who can access the information) and without explicit regard to subsequent accesses to that information.",
+    "nist_reference": "NIST SP 800-171 Rev 2 3.1.3"
+  },
+  {
+    "control_id": "AC.L2-3.1.4",
+    "domain": "Access Control",
+    "title": "Separation of Duties",
+    "requirement": "Separate the duties of individuals to reduce the risk of malevolent activity without collusion.",
+    "assessment_objective": "Determine if the organization separates duties of individuals as necessary to prevent malevolent activity without collusion.",
+    "discussion": "Separation of duties addresses the potential for abuse of authorized privileges and helps to reduce the risk of malevolent activity without collusion. Separation of duties includes dividing mission functions and system support functions among different individuals or roles.",
+    "nist_reference": "NIST SP 800-171 Rev 2 3.1.4"
+  },
+  {
+    "control_id": "AC.L2-3.1.5",
+    "domain": "Access Control",
+    "title": "Least Privilege",
+    "requirement": "Employ the principle of least privilege, including for specific security functions and privileged accounts.",
+    "assessment_objective": "Determine if the organization employs the principle of least privilege for all authorized accesses to the system, including specific security functions and privileged accounts.",
+    "discussion": "Organizations employ least privilege for specific duties and systems. The principle of least privilege is applied with the goal of authorized privileges no higher than necessary to accomplish required organizational missions or business functions.",
+    "nist_reference": "NIST SP 800-171 Rev 2 3.1.5"
+  },
+  {
+    "control_id": "AC.L2-3.1.6",
+    "domain": "Access Control",
+    "title": "Non-Privileged Account Use",
+    "requirement": "Use non-privileged accounts or roles when accessing nonsecurity functions.",
+    "assessment_objective": "Determine if individuals are required to use non-privileged accounts or roles when accessing non-security functions.",
+    "discussion": "This requirement limits exposure when operating from within privileged accounts or roles. The inclusion of roles addresses situations where organizations implement access control policies such as role-based access control and where a change of role provides the same degree of assurance in the change of access authorizations for the user and all processes acting on behalf of the user as would be provided by a change between a privileged and non-privileged account.",
+    "nist_reference": "NIST SP 800-171 Rev 2 3.1.6"
+  },
+  {
+    "control_id": "AC.L2-3.1.7",
+    "domain": "Access Control",
+    "title": "Privileged Functions",
+    "requirement": "Prevent non-privileged users from executing privileged functions and capture the execution of such functions in audit logs.",
+    "assessment_objective": "Determine if the organization prevents non-privileged users from executing privileged functions and audit the execution of such functions.",
+    "discussion": "Privileged functions include establishing system accounts, performing system integrity checks, conducting patching operations, or administering cryptographic key management activities. Non-privileged users are individuals that do not possess appropriate authorizations.",
+    "nist_reference": "NIST SP 800-171 Rev 2 3.1.7"
+  },
+  {
+    "control_id": "AC.L2-3.1.8",
+    "domain": "Access Control",
+    "title": "Unsuccessful Logon Attempts",
+    "requirement": "Limit unsuccessful logon attempts.",
+    "assessment_objective": "Determine if the organization limits the number of consecutive invalid logon attempts by a user.",
+    "discussion": "This requirement applies regardless of whether the logon occurs via a local or network connection. Due to the potential for denial of service, automatic lockouts initiated by systems are usually temporary and automatically release after a predetermined time period established by the organization.",
+    "nist_reference": "NIST SP 800-171 Rev 2 3.1.8"
+  },
+  {
+    "control_id": "AC.L2-3.1.9",
+    "domain": "Access Control",
+    "title": "Privacy and Security Notices",
+    "requirement": "Provide privacy and security notices consistent with applicable CUI rules.",
+    "assessment_objective": "Determine if the organization provides privacy and security notices consistent with applicable CUI rules.",
+    "discussion": "System use notifications can be implemented using messages or warning banners displayed before individuals log in to systems. System use notifications are used only for access via logon interfaces with human users and are not required when such human interfaces do not exist.",
+    "nist_reference": "NIST SP 800-171 Rev 2 3.1.9"
+  },
+  {
+    "control_id": "AC.L2-3.1.10",
+    "domain": "Access Control",
+    "title": "Session Lock",
+    "requirement": "Use session lock with pattern-hiding displays to prevent access and viewing of data after a period of inactivity.",
+    "assessment_objective": "Determine if the organization uses session lock with pattern-hiding displays to prevent access and viewing of data after a period of inactivity.",
+    "discussion": "Session locks are temporary actions taken when users stop work and move away from the immediate vicinity of the system but do not want to log out because of the temporary nature of their absences. Pattern-hiding displays can include static or dynamic images, for example, patterns used with screen savers, photographic images, solid colors, or a blank screen.",
+    "nist_reference": "NIST SP 800-171 Rev 2 3.1.10"
+  },
+  {
+    "control_id": "AC.L2-3.1.11",
+    "domain": "Access Control",
+    "title": "Session Termination",
+    "requirement": "Terminate (automatically) a user session after a defined condition.",
+    "assessment_objective": "Determine if the organization automatically terminates a user session after organization-defined conditions or trigger events requiring session disconnect.",
+    "discussion": "This requirement addresses the termination of user-initiated logical sessions in contrast to the termination of network connections that are associated with communications sessions. A logical session (for local, network, and remote access) is initiated whenever a user (or process acting on behalf of a user) accesses an organizational system.",
+    "nist_reference": "NIST SP 800-171 Rev 2 3.1.11"
+  },
+  {
+    "control_id": "AC.L2-3.1.12",
+    "domain": "Access Control",
+    "title": "Control Remote Access",
+    "requirement": "Monitor and control remote access sessions.",
+    "assessment_objective": "Determine if the organization employs automated mechanisms to facilitate the monitoring and control of remote access methods.",
+    "discussion": "Automated monitoring and control of remote access sessions allows organizations to detect cyber attacks and help ensure ongoing compliance with remote access policies by auditing connection activities of remote users on a variety of system components.",
+    "nist_reference": "NIST SP 800-171 Rev 2 3.1.12"
+  },
+  {
+    "control_id": "AC.L2-3.1.13",
+    "domain": "Access Control",
+    "title": "Remote Access Confidentiality",
+    "requirement": "Employ cryptographic mechanisms to protect the confidentiality of remote access sessions.",
+    "assessment_objective": "Determine if the organization employs cryptographic mechanisms to protect the confidentiality of remote access sessions.",
+    "discussion": "Cryptographic standards include FIPS-validated cryptography and NSA-approved cryptography. Remote access is any access to an organizational system by a user (or a process acting on behalf of a user) communicating through an external network.",
+    "nist_reference": "NIST SP 800-171 Rev 2 3.1.13"
+  },
+  {
+    "control_id": "AC.L2-3.1.14",
+    "domain": "Access Control",
+    "title": "Remote Access Routing",
+    "requirement": "Route remote access via managed access control points.",
+    "assessment_objective": "Determine if the organization routes all remote accesses through a managed number of access control points.",
+    "discussion": "Routing remote access through managed access control points enhances explicit, organizational control over such connections, reducing the susceptibility to unauthorized access to organizational systems resulting in the unauthorized disclosure of CUI.",
+    "nist_reference": "NIST SP 800-171 Rev 2 3.1.14"
+  },
+  {
+    "control_id": "AC.L2-3.1.15",
+    "domain": "Access Control",
+    "title": "Remote Access Authorization",
+    "requirement": "Authorize remote execution of privileged commands and remote access to security-relevant information.",
+    "assessment_objective": "Determine if the organization authorizes the execution of privileged commands and access to security-relevant information via remote access only for compelling operational needs.",
+    "discussion": "A compelling operational need includes situations in which (i) remote access is essential for incident response or forensics; (ii) mission operations require immediate access to system resources and controls; or (iii) loss of organizational systems would occur without remote access.",
+    "nist_reference": "NIST SP 800-171 Rev 2 3.1.15"
+  }
+]
