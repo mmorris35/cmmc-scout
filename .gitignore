@@ -78,3 +78,4 @@ demo_report.*
 
 # Docker volumes (if using local)
 postgres_data/
+sample_report.*

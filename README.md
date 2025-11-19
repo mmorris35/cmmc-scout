@@ -453,9 +453,9 @@ MIT License - see [LICENSE](LICENSE) file for details
 
 ## Contact
 
-**Project Lead:** [Your Name]
-**Email:** your.email@example.com
-**GitHub:** [@yourusername](https://github.com/yourusername)
+**Project Lead:** Mike Morris
+**Email:** mike@mikemorris.net
+**GitHub:** [@mmorris35](https://github.com/mmorris35)
 
 **Use Case Inquiries:**
 If you're a defense contractor or CMMC consultant interested in this tool, please reach out!

@@ -18,6 +18,12 @@ from .gap_service import (
     generate_gap_recommendations,
     get_gap_service,
 )
+from .report_service import (
+    generate_gap_report,
+    export_report_markdown,
+    export_report_json,
+    get_report_service,
+)
 
 __all__ = [
     # Control service
@@ -38,4 +44,9 @@ __all__ = [
     "get_remediation_plan",
     "generate_gap_recommendations",
     "get_gap_service",
+    # Report service
+    "generate_gap_report",
+    "export_report_markdown",
+    "export_report_json",
+    "get_report_service",
 ]

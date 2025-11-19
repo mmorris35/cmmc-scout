@@ -24,6 +24,7 @@ from src.models import (
 )
 from src.auth.middleware import require_auth
 from src.services.control_service import get_control_service
+from src.services.report_service import generate_gap_report
 from src.agents.assessment_agent import create_assessment_agent
 from src.actors.session_actor import SessionActor
 from src.events import get_event_producer
@@ -406,117 +407,9 @@ async def get_assessment_report(
                 detail="Assessment not found",
             )
 
-        if assessment.status != "completed":
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Assessment not yet completed. Complete all controls first.",
-            )
-
-        # Get all responses
-        responses = db.query(ControlResponse).filter_by(
-            assessment_id=assessment_uuid
-        ).all()
-
-        if not responses:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail="No responses found for this assessment",
-            )
-
-        # Calculate scoring (placeholder - will be enhanced in subtask 3.2)
-        from src.models.schemas import ControlResponseSummary, GapItem, ScoringResults
-
-        total = len(responses)
-        compliant = sum(1 for r in responses if r.classification == "compliant")
-        partial = sum(1 for r in responses if r.classification == "partial")
-        non_compliant = sum(1 for r in responses if r.classification == "non_compliant")
-
-        score = (compliant * 1.0 + partial * 0.5) / total if total > 0 else 0.0
-        percentage = score * 100
-
-        if score >= 0.8:
-            traffic_light = "green"
-        elif score >= 0.5:
-            traffic_light = "yellow"
-        else:
-            traffic_light = "red"
-
-        scoring = ScoringResults(
-            total_controls=total,
-            compliant_count=compliant,
-            partial_count=partial,
-            non_compliant_count=non_compliant,
-            compliance_score=score,
-            compliance_percentage=percentage,
-            traffic_light=traffic_light,
-        )
-
-        # Build response summaries
-        control_summaries = [
-            ControlResponseSummary(
-                control_id=r.control_id,
-                control_title=r.control_title,
-                classification=r.classification,
-                user_response=r.user_response,
-                agent_explanation=r.agent_notes or "",
-                remediation=r.remediation_notes,
-            )
-            for r in responses
-        ]
-
-        # Identify gaps
-        gaps = []
-        for r in responses:
-            if r.classification in ["partial", "non_compliant"]:
-                severity = "high" if r.classification == "non_compliant" else "medium"
-                priority = 9 if r.classification == "non_compliant" else 6
-
-                gap = GapItem(
-                    control_id=r.control_id,
-                    control_title=r.control_title,
-                    severity=severity,
-                    current_status=r.classification,
-                    gap_description=r.agent_notes or "Implementation gap identified",
-                    remediation_steps=r.remediation_notes.split("\n") if r.remediation_notes else ["Review and implement control requirements"],
-                    estimated_effort="High" if r.classification == "non_compliant" else "Medium",
-                    estimated_cost=">$20K" if r.classification == "non_compliant" else "$5-20K",
-                    priority=priority,
-                )
-                gaps.append(gap)
-
-        # Sort gaps by priority
-        gaps.sort(key=lambda g: g.priority, reverse=True)
-
-        # Executive summary
-        exec_summary = f"""
-Assessment of {assessment.domain} domain completed with {compliant} compliant, {partial} partially compliant,
-and {non_compliant} non-compliant controls out of {total} total controls.
-
-Overall compliance score: {percentage:.1f}% ({traffic_light.upper()})
-
-{len(gaps)} gaps identified requiring remediation to achieve CMMC Level 2 compliance.
-        """.strip()
-
-        # Recommendations
-        recommendations = []
-        if non_compliant > 0:
-            recommendations.append(f"Address {non_compliant} non-compliant controls as highest priority")
-        if partial > 0:
-            recommendations.append(f"Enhance {partial} partially compliant controls to full compliance")
-        if score < 0.8:
-            recommendations.append("Develop comprehensive remediation plan to achieve 80%+ compliance score")
-        recommendations.append("Schedule regular compliance reviews and updates")
-
-        return AssessmentReport(
-            assessment_id=assessment_id,
-            domain=assessment.domain,
-            generated_at=datetime.utcnow().isoformat(),
-            scoring=scoring,
-            executive_summary=exec_summary,
-            control_responses=control_summaries,
-            gaps=gaps,
-            recommendations=recommendations,
-        )
+        # Generate report using report service
+        report = generate_gap_report(assessment_uuid, db)
+        return report
 
     except HTTPException:
         raise
