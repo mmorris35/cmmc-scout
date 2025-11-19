@@ -130,6 +130,7 @@ class ControlResponse(Base):
     # Agent's evaluation
     classification = Column(String(50), nullable=False)  # compliant, partial, non_compliant
     agent_notes = Column(Text, nullable=True)
+    remediation_notes = Column(Text, nullable=True)
 
     # Evidence
     evidence_provided = Column(Boolean, default=False)

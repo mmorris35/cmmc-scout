@@ -23,6 +23,12 @@ except Exception as e:
     # Auth0 not configured - continue without auth routes
     print(f"Warning: Auth routes not loaded ({e})")
 
+try:
+    from src.api import assessment_router
+    app.include_router(assessment_router)
+except Exception as e:
+    print(f"Warning: Assessment routes not loaded ({e})")
+
 # CORS configuration
 app.add_middleware(
     CORSMiddleware,

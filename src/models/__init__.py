@@ -1,4 +1,4 @@
-"""Database models for CMMC Scout."""
+"""Database models and API schemas for CMMC Scout."""
 
 from .database import (
     Base,
@@ -9,8 +9,24 @@ from .database import (
     get_session_maker,
     init_db,
 )
+from .schemas import (
+    StartAssessmentRequest,
+    StartAssessmentResponse,
+    SubmitResponseRequest,
+    SubmitResponseResponse,
+    AssessmentStatus,
+    AssessmentReport,
+    ControlInfo,
+    ClassificationResult,
+    ControlResponseSummary,
+    GapItem,
+    ScoringResults,
+    ErrorResponse,
+    HealthCheckResponse,
+)
 
 __all__ = [
+    # Database models
     "Base",
     "User",
     "Assessment",
@@ -18,4 +34,18 @@ __all__ = [
     "get_db_engine",
     "get_session_maker",
     "init_db",
+    # API schemas
+    "StartAssessmentRequest",
+    "StartAssessmentResponse",
+    "SubmitResponseRequest",
+    "SubmitResponseResponse",
+    "AssessmentStatus",
+    "AssessmentReport",
+    "ControlInfo",
+    "ClassificationResult",
+    "ControlResponseSummary",
+    "GapItem",
+    "ScoringResults",
+    "ErrorResponse",
+    "HealthCheckResponse",
 ]
