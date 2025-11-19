@@ -8,6 +8,10 @@ from typing import Dict, Any, Optional
 from datetime import datetime
 
 from langchain.chat_models import ChatOpenAI
+try:
+    from langchain_anthropic import ChatAnthropic
+except ImportError:
+    from langchain.chat_models import ChatAnthropic
 from langchain.schema import HumanMessage, SystemMessage, AIMessage
 
 from .prompts import (
@@ -51,16 +55,29 @@ class AssessmentAgent:
         self.model_name = model_name
         self.temperature = temperature
 
-        # Initialize LLM
-        api_key = os.getenv("OPENAI_API_KEY") or os.getenv("ANTHROPIC_API_KEY")
-        if not api_key:
+        # Initialize LLM - support both OpenAI and Anthropic
+        openai_key = os.getenv("OPENAI_API_KEY")
+        anthropic_key = os.getenv("ANTHROPIC_API_KEY")
+
+        if not openai_key and not anthropic_key:
             raise ValueError("No LLM API key found. Set OPENAI_API_KEY or ANTHROPIC_API_KEY")
 
-        self.llm = ChatOpenAI(
-            model_name=model_name,
-            temperature=temperature,
-            openai_api_key=os.getenv("OPENAI_API_KEY"),
-        )
+        if anthropic_key:
+            # Use Anthropic Claude
+            self.llm = ChatAnthropic(
+                model_name="claude-3-haiku-20240307",
+                temperature=temperature,
+                anthropic_api_key=anthropic_key,
+            )
+            logger.info("Using Anthropic Claude Haiku model")
+        else:
+            # Use OpenAI
+            self.llm = ChatOpenAI(
+                model_name=model_name,
+                temperature=temperature,
+                openai_api_key=openai_key,
+            )
+            logger.info(f"Using OpenAI {model_name} model")
 
         # Conversation history
         self.conversation_history = []
