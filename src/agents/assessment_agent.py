@@ -7,12 +7,23 @@ import logging
 from typing import Dict, Any, Optional
 from datetime import datetime
 
-from langchain.chat_models import ChatOpenAI
+try:
+    from langchain_openai import ChatOpenAI
+except ImportError:
+    from langchain.chat_models import ChatOpenAI
+
 try:
     from langchain_anthropic import ChatAnthropic
 except ImportError:
-    from langchain.chat_models import ChatAnthropic
-from langchain.schema import HumanMessage, SystemMessage, AIMessage
+    try:
+        from langchain.chat_models import ChatAnthropic
+    except ImportError:
+        ChatAnthropic = None
+
+try:
+    from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
+except ImportError:
+    from langchain.schema import HumanMessage, SystemMessage, AIMessage
 
 from .prompts import (
     SYSTEM_PROMPT_TEMPLATE,
@@ -155,7 +166,13 @@ class AssessmentAgent:
         start_time = datetime.utcnow()
 
         try:
-            response = self.llm(messages)
+            # Use invoke() for newer langchain versions, fallback to __call__
+            if hasattr(self.llm, 'invoke'):
+                logger.debug(f"Using invoke() method for {type(self.llm).__name__}")
+                response = self.llm.invoke(messages)
+            else:
+                logger.debug(f"Using __call__() method for {type(self.llm).__name__}")
+                response = self.llm(messages)
             question = response.content
 
             # Log to Comet
@@ -212,7 +229,13 @@ class AssessmentAgent:
         start_time = datetime.utcnow()
 
         try:
-            response = self.llm(messages)
+            # Use invoke() for newer langchain versions, fallback to __call__
+            if hasattr(self.llm, 'invoke'):
+                logger.debug(f"Using invoke() method for {type(self.llm).__name__}")
+                response = self.llm.invoke(messages)
+            else:
+                logger.debug(f"Using __call__() method for {type(self.llm).__name__}")
+                response = self.llm(messages)
             result_text = response.content
 
             # Try to parse JSON response
